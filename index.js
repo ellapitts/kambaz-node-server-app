@@ -5,6 +5,9 @@ import express from "express";
 import Hello from "./Hello.js"; // import Hello from Hello.js
 import Lab5 from "./Lab5/index.js";
 import UserRoutes from "./Kambaz/Users/routes.js";
+import CourseRoutes from "./Kambaz/Courses/routes.js";
+import ModulesRoutes from "./Kambaz/Modules/routes.js";
+import AssignmentsRoutes from "./Kambaz/Assignments/routes.js";
 import db from "./Kambaz/Database/index.js";
 import cors from "cors";
 
@@ -36,5 +39,7 @@ app.use(express.json());
 Hello(app); // pass app reference to Hello
 Lab5(app);
 UserRoutes(app, db); // Passes reference to daabase to each route.
-
+CourseRoutes(app, db);
+ModulesRoutes(app, db);
+AssignmentsRoutes(app, db);
 app.listen(process.env.PORT || 4000);
