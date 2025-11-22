@@ -15,7 +15,23 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: function(origin, callback) {
+      const allowedOrigins = [
+        process.env.CLIENT_URL,
+    'https://kambaz-next-js-main.vercel.app',
+    'https://kambaz-next-js-main-git-main-ellapitts-projects.vercel.app',
+    'http://localhost:3000'
+      ];
+
+      // Allow any Vercel preview deployment
+      const vercelPattern = /^https:\/\/kambaz-next-js-main-.*\.vercel\.app$/;
+      
+      if (!origin || allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
   })
 );
 
