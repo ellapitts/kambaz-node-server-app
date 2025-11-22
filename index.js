@@ -24,7 +24,7 @@ app.use(
       ];
 
       // Allow any Vercel preview deployment
-      const vercelPattern = /^https:\/\/kambaz-next-js-main-.*\.vercel\.app$/;
+      const vercelPattern = /^https:\/\/kambaz-next-js-main2.*\.vercel\.app$/;
       
       if (!origin || allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
         callback(null, true);
