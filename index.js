@@ -18,34 +18,40 @@ mongoose.connect(CONNECTION_STRING)  // Connects to kambaz database
     
 // ------ Express setup ------
 const app = express();
+// The deployed frontend URL is read directly from the environment variable
+const CLIENT_URL = process.env.CLIENT_URL;
+
 app.use(
   cors({
     credentials: true,
-    origin: function(origin, callback) {
-      const allowedOrigins = [
-        process.env.CLIENT_URL,
-    'https://kambaz-next-js-main.vercel.app',
-    'https://kambaz-next-js-main-git-main-ellapitts-projects.vercel.app',
-    'https://kambaz-next-js-main2-git-a6-ellapitts-projects.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:3002',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001',
-    'http://127.0.0.1:3002'
-      ];
-
-      // Allow any Vercel preview deployment
-      const vercelPattern = /^https:\/\/kambaz-next-js-main2.*\.vercel\.app$/;
-      
-      if (!origin || allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    }
+    // origin: function(origin, callback) {
+      origin: CLIENT_URL,
   })
 );
+    //   [
+    //     process.env.CLIENT_URL,
+    // 'https://kambaz-next-js-main.vercel.app',
+    // 'https://kambaz-next-js-main-git-main-ellapitts-projects.vercel.app',
+    // 'https://kambaz-next-js-main2-git-a6-ellapitts-projects.vercel.app',
+    // 'http://localhost:3000',
+    // 'http://localhost:3001',
+    // 'http://localhost:3002',
+    // 'http://127.0.0.1:3000',
+    // 'http://127.0.0.1:3001',
+    // 'http://127.0.0.1:3002'
+    //   ];
+
+      // Allow any Vercel preview deployment
+//       const vercelPattern = /^https:\/\/kambaz-next-js-main2.*\.vercel\.app$/;
+      
+//       if (!origin || allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     }
+//   })
+// );
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
