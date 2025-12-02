@@ -27,22 +27,21 @@ app.use(
     credentials: true,
     origin: function(origin, callback) {
       const allowedOrigins = [
-    // origin: function(origin, callback) {
       CLIENT_URL,
       'https://kambaz-next-js-main.vercel.app',
       'https://kambaz-next-js-main-git-main-ellapitts-projects.vercel.app',
       'https://kambaz-next-js-main2-git-a6-ellapitts-projects.vercel.app',
       'https://kambaz-next-js-main2-9cpyoxzsu-ellapitts-projects.vercel.app',
       // for local dev
-         'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:3002',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001',
-    'http://127.0.0.1:3002',
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:3002',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:3001',
+      'http://127.0.0.1:3002',
     ];
           //Allow any Vercel preview deployment
-     const vercelPattern = /^https:\/\/kambaz-next-js-main2.*\.vercel\.app$/;
+     const vercelPattern = /^https:\/\/kambaz-next-js-main.*\.vercel\.app$/;
       
       if (!origin || allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
         callback(null, true);
@@ -57,13 +56,17 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  }
 };
 if (process.env.SERVER_ENV !== "development") {
   sessionOptions.proxy = true;
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    domain: process.env.SERVER_URL,
+    // domain: process.env.SERVER_URL,
   };
 }
 app.use(session(sessionOptions));
