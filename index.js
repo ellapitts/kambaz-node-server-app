@@ -26,6 +26,7 @@ app.use(
         process.env.CLIENT_URL,
     'https://kambaz-next-js-main.vercel.app',
     'https://kambaz-next-js-main-git-main-ellapitts-projects.vercel.app',
+    'https://kambaz-next-js-main2-git-a6-ellapitts-projects.vercel.app',
     'http://localhost:3000',
     'http://localhost:3001',
     'http://localhost:3002',
